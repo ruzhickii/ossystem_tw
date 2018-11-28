@@ -9,9 +9,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+
+
 const styles = {
     card: {
-        maxWidth: 345,
+        maxWidth: 400,
         margin: '5px'
     },
     media: {
@@ -22,6 +24,9 @@ const styles = {
 
 function ImgMediaCard(props) {
     const { classes } = props;
+
+    console.log( props );
+
     return (
         <Card className={classes.card}>
             <CardActionArea>
@@ -29,17 +34,16 @@ function ImgMediaCard(props) {
                     component="img"
                     alt="Contemplative Reptile"
                     className={classes.media}
-                    height="140"
-                    image='./img1.JPG'
+                    height="400"
+                    image={props.card.default[2].image}
                     title="Contemplative Reptile"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
+                        {props.card.default[2].name}
                     </Typography>
                     <Typography component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
+                        {props.card.default[2].description}
                     </Typography>
                 </CardContent>
             </CardActionArea>

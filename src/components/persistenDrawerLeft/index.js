@@ -22,6 +22,10 @@ import Logo from '../logo';
 import Grid from '@material-ui/core/Grid';
 
 
+
+import * as card from '../../api/mockData';
+
+
 import Card from '../card';
 
 const drawerWidth = 240;
@@ -88,6 +92,7 @@ class PersistentDrawerLeft extends React.Component {
     state = {
         open: false,
     };
+
 
     handleDrawerOpen = () => {
         this.setState({ open: true });
@@ -165,8 +170,13 @@ class PersistentDrawerLeft extends React.Component {
                           direction="row"
                           justify="center"
                           alignItems="center"
+
                     >
-                        <Card />
+                        {[...Array(6)].map((n, index) =>
+                            <div key={index}>
+                                <Card card = {card} />
+                            </div>
+                        )}
                     </Grid>
                 </main>
             </div>

@@ -8,7 +8,6 @@ import {Lines} from 'react-preloaders';
 import PersistenDrawerLeft from '../../components/persistenDrawerLeft';
 
 
-
 class App extends Component {
   render() {
 
@@ -25,9 +24,6 @@ class App extends Component {
       <div className="App">
         <Lines time={1000} />
         <PersistenDrawerLeft />
-          <div style={{backgroundImage: "url('https://tehnot.com/wp-content/uploads/2017/03/android-o-00.jpg')", width: '200px', height: '200px', backgroundColor: 'red'}} >
-              Hello !!!
-          </div>
         <div>
           <h1>{ phones[0].title }</h1>
           <button onClick={setPhones.bind(this, newPhones)}>Set new Phones</button>
