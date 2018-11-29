@@ -1,10 +1,6 @@
 const initialState = {
-    phones: [
-        {
-            id: 0,
-            title: 'Hello World !!!'
-        }
-    ]
+    isReady: false,
+    items: null
 };
 
 export default (state = initialState, action) => {
@@ -12,19 +8,16 @@ export default (state = initialState, action) => {
         case 'SET_PHONES':
             return {
                 ...state,
-                phones: action.payload
+                items: action.payload,
+                isReady: true
             };
-        case 'ADD_PHONES':
+        case 'SET_IS_READY':
             return {
-                phones: {
-                    ...state,
-                    phones: [
-                        ...state.phones,
-                        action.payload
-                    ]
-                }
+                ...state,
+                isReady: action.payload
             };
+            break;
         default:
             return state;
     }
-}
+};

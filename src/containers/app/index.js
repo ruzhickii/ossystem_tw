@@ -1,40 +1,46 @@
 import React, { Component } from 'react';
 import './index.scss';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import { setPhones } from '../../actions/phones';
 
 import {Lines} from 'react-preloaders';
-import PersistenDrawerLeft from '../../components/persistenDrawerLeft';
+import Menu from '../../components/menuSemantic';
+import PhoneCard from '../../components/phoneCardSemantic';
+
+import 'semantic-ui-css/semantic.min.css';
+import { Container } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
+
 
 
 class App extends Component {
-  render() {
+    componentWillMount() {
+        const { setPhones } = this.props;
+        axios.get('/mockPhones.json').then(({ data }) => {
+            setPhones(data);
+        })
+    }
 
-    const { phones } = this.props.phones; // reducers -> state
-    const { setPhones } = this.props; // props
-    const newPhones = [
-        {
-          id: 0,
-          title: 'Iphone 6S'
-        }
-    ];
+    render() {
+    const { phones, isReady } = this.props;
 
     return (
-      <div className="App">
+      <Container className="App">
         <Lines time={1000} />
-        <PersistenDrawerLeft />
-        <div>
-          <h1>{ phones[0].title }</h1>
-          <button onClick={setPhones.bind(this, newPhones)}>Set new Phones</button>
-        </div>
-      </div>
+          <Menu />
+          <Card.Group itemsPerRow={3}>
+              {!isReady ? 'загрузка' : phones.map((phone, i) =>  <PhoneCard key={i} {...phone} /> )}
+          </Card.Group>
+      </Container>
     );
   }
 }
 
-const mapStateToProps = state => ({
-    ...state
+const mapStateToProps = ({ phones }) => ({
+    phones: phones.items,
+    isReady: phones.isReady
 });
 
 const mapDispatchToProps = dispatch => ({
