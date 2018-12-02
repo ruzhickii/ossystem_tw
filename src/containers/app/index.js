@@ -1,50 +1,33 @@
-import React, { Component } from 'react';
-import './index.scss';
 import { connect } from 'react-redux';
-import axios from 'axios';
-
-import { setPhones } from '../../actions/phones';
-
-import {Lines} from 'react-preloaders';
-import Menu from '../../components/menuSemantic';
-import PhoneCard from '../../components/phoneCardSemantic';
-
-import 'semantic-ui-css/semantic.min.css';
-import { Container } from 'semantic-ui-react';
-import { Card } from 'semantic-ui-react';
+import { bindActionCreators } from "redux";
+import * as phonesActions from '../../actions/phones';
+import App from '../../components/app';
+import orderBy from 'lodash/orderBy';
 
 
-
-class App extends Component {
-    componentWillMount() {
-        const { setPhones } = this.props;
-        axios.get('/mockPhones.json').then(({ data }) => {
-            setPhones(data);
-        })
-    }
-
-    render() {
-    const { phones, isReady } = this.props;
-
-    return (
-      <Container className="App">
-        <Lines time={1000} />
-          <Menu />
-          <Card.Group itemsPerRow={3}>
-              {!isReady ? 'загрузка' : phones.map((phone, i) =>  <PhoneCard key={i} {...phone} /> )}
-          </Card.Group>
-      </Container>
-    );
+const sortBy = (phones, filterBy) => {
+  switch (filterBy) {
+      case 'all':
+          return phones;
+      case 'price_high':
+          return orderBy(phones, 'price', 'desc');
+      case 'price_low':
+          return orderBy(phones, 'price', 'asc');
+      case 'name':
+          return orderBy(phones, 'name', 'asc');
+      default:
+          return phones;
   }
-}
+};
+
 
 const mapStateToProps = ({ phones }) => ({
-    phones: phones.items,
+    phones: sortBy(phones.items, phones.filterBy),
     isReady: phones.isReady
 });
 
 const mapDispatchToProps = dispatch => ({
-  setPhones: phones => dispatch(setPhones(phones))
+    ...bindActionCreators(phonesActions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
