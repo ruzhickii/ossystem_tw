@@ -5,8 +5,8 @@ import Filter from '../../components/filter';
 
 
 
-const mapStateToProps = ({ phones }) => ({
-    filterBy: phones.filterBy,
+const mapStateToProps = ({ phones, filter }) => ({
+    filterBy: filter.filterBy,
 });
 
 const mapDispatchToProps = dispatch => ({

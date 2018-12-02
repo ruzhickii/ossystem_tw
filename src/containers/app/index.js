@@ -7,8 +7,6 @@ import orderBy from 'lodash/orderBy';
 
 const sortBy = (phones, filterBy) => {
   switch (filterBy) {
-      case 'all':
-          return phones;
       case 'price_high':
           return orderBy(phones, 'price', 'desc');
       case 'price_low':
@@ -20,10 +18,21 @@ const sortBy = (phones, filterBy) => {
   }
 };
 
+const filterPhones = (phones, searchQuery) =>
+    phones.filter(
+        o =>
+            o.name.toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0,
+    );
 
-const mapStateToProps = ({ phones }) => ({
-    phones: sortBy(phones.items, phones.filterBy),
-    isReady: phones.isReady
+const searchPhones = (phones, filterBy, searchQuery) => {
+    return sortBy(filterPhones(phones, searchQuery), filterBy);
+};
+
+const mapStateToProps = ({ phones, filter }) => ({
+    phones:
+        phones.items &&
+        searchPhones(phones.items, filter.filterBy, filter.searchQuery),
+    isReady: phones.isReady,
 });
 
 const mapDispatchToProps = dispatch => ({

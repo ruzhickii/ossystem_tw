@@ -3,7 +3,7 @@ import { Input, Menu } from 'semantic-ui-react'
 
 
 
-const Filter = ({ setFilter, filterBy }) => (
+const Filter = ({ setFilter, filterBy, searchQuery, setSearchQuery }) => (
     <Menu secondary>
         <Menu.Item  active={filterBy === 'all'} onClick={setFilter.bind(this, 'all')} >
             Все
@@ -16,6 +16,9 @@ const Filter = ({ setFilter, filterBy }) => (
         </Menu.Item>
         <Menu.Item  active={filterBy === 'name'} onClick={setFilter.bind(this, 'name')} >
             Название
+        </Menu.Item>
+        <Menu.Item>
+            <Input onChange={e => setSearchQuery(e.target.value)} value={searchQuery} icon='search' placeholder ='Введите запрос...' />
         </Menu.Item>
     </Menu>
 
