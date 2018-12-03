@@ -1,18 +1,15 @@
 const initialState = {
-    items: []
+    items: [],
 };
 
 export default (state = initialState, action) => {
     switch(action.type) {
-        case 'ADD_PHONE':
+        case 'ADD_TO_BASKET':
             return {
                 ...state,
-                items: [
-                    ...state.items,
-                    action.payload
-                ],
+                items: [...state.items, action.payload],
             };
-        case 'REMOVE_PHONE':
+        case 'REMOVE_FROM_BASKET':
             return {
                 ...state,
                 items: state.items.filter(o => o.id != action.payload)
@@ -21,4 +18,4 @@ export default (state = initialState, action) => {
         default:
             return state;
     }
-}
+};

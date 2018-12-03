@@ -3,9 +3,9 @@ import './index.scss';
 import axios from 'axios';
 
 import {Lines} from 'react-preloaders';
-import Menu from '../../components/menuSemantic';
-import PhoneCard from '../../components/phoneCardSemantic';
+import PhoneCard from '../../containers/phoneCardSemantic';
 import Filter from '../../containers/filter';
+import Menu from '../../containers/menuSemantic';
 
 import 'semantic-ui-css/semantic.min.css';
 import { Container } from 'semantic-ui-react';
@@ -23,7 +23,6 @@ class App extends Component {
 
     render() {
         const { phones, isReady } = this.props;
-
         return (
             <Container className="App">
                 <Lines time={1000} />

@@ -18,7 +18,7 @@ const Filter = ({ setFilter, filterBy, searchQuery, setSearchQuery }) => (
             Название
         </Menu.Item>
         <Menu.Item>
-            <Input onChange={e => setSearchQuery(e.target.value)} value={searchQuery} icon='search' placeholder ='Введите запрос...' />
+            <Input onChange={e => setSearchQuery(e.target.value)} value={searchQuery} icon='search' placeholder ='Модель телефона...' />
         </Menu.Item>
     </Menu>
 

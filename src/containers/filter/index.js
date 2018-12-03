@@ -6,11 +6,11 @@ import Filter from '../../components/filter';
 
 
 const mapStateToProps = ({ phones, filter }) => ({
-    filterBy: filter.filterBy,
+    filterBy: filter.filterBy
 });
 
 const mapDispatchToProps = dispatch => ({
-    ...bindActionCreators(filterActions, dispatch),
+    ...bindActionCreators(filterActions, dispatch)
 });
 
 

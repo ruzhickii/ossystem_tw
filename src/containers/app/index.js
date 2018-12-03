@@ -21,7 +21,7 @@ const sortBy = (phones, filterBy) => {
 const filterPhones = (phones, searchQuery) =>
     phones.filter(
         o =>
-            o.name.toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0,
+            o.name.toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0
     );
 
 const searchPhones = (phones, filterBy, searchQuery) => {
@@ -29,14 +29,12 @@ const searchPhones = (phones, filterBy, searchQuery) => {
 };
 
 const mapStateToProps = ({ phones, filter }) => ({
-    phones:
-        phones.items &&
-        searchPhones(phones.items, filter.filterBy, filter.searchQuery),
+    phones: phones.items && searchPhones(phones.items, filter.filterBy, filter.searchQuery),
     isReady: phones.isReady,
 });
 
 const mapDispatchToProps = dispatch => ({
-    ...bindActionCreators(phonesActions, dispatch),
+    ...bindActionCreators(phonesActions, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
